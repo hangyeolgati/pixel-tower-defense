@@ -547,7 +547,15 @@ const io = new IntersectionObserver(entries => {
 /* ---------- start ---------- */
 render();
 (async () => {
-  if(API_URL){ backend = apiBackend(); return; }
+  if(API_URL){
+    backend = apiBackend();
+    /* 방문자: 같은 기기는 하루 한 번만 보냄 (서버에서도 하루 한 번만 셈) */
+    const day = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Seoul"});
+    if(store.get("ptd-visit-day") !== day){
+      fetch(API_URL + "?visit=" + encodeURIComponent(deviceId)).then(() => store.set("ptd-visit-day", day)).catch(() => {});
+    }
+    return;
+  }
   if(!window.claude || !window.claude.use){ offline("명단 서버가 연결되지 않은 페이지입니다. API 주소를 설정해 주세요."); return; }
   try{ backend = await dbBackend(); }catch(_){ backend = null; }
   if(!backend) offline("명단을 보려면 로그인한 상태로 페이지를 열어 주세요.");
