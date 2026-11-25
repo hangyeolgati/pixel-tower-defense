@@ -59,7 +59,10 @@ button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;o
 .command:before{top:6px;left:6px;border-left:2px solid var(--accent);border-top:2px solid var(--accent)}
 .command:after{bottom:6px;right:6px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent)}
 .art,.shade{position:absolute;inset:0;z-index:-1}
-.art{left:24%;background:url(assets/menu/volcano.webp) center 40%/cover;image-rendering:pixelated}
+.art{left:24%}
+.art i{position:absolute;inset:0;background:center 40%/cover no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1s ease}
+.art i.on{opacity:1}
+@media(prefers-reduced-motion:reduce){.art i{transition:none}}
 .shade{background:linear-gradient(90deg,#12191f 0%,#12191f 22%,#12191fdd 34%,#12191f40 58%,transparent 80%),linear-gradient(0deg,#0b1216e0,transparent 40%)}
 .menu-column{position:relative;margin:clamp(24px,3.6vw,50px);width:min(440px,100%)}
 .wordmark{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--accent2)}
@@ -194,7 +197,7 @@ h1{font-size:clamp(40px,4.8vw,64px);font-weight:900;line-height:1.05;letter-spac
 
 <main class="shell">
   <section class="command" id="reserve">
-    <div class="art"></div><div class="shade"></div>
+    <div class="art" id="art"><i class="on" style="background-image:url(assets/menu/volcano.webp)"></i></div><div class="shade"></div>
     <div class="menu-column">
       <div class="wordmark">PIXEL TOWER DEFENSE</div>
       <h1>픽셀 타워 디펜스</h1>
@@ -507,6 +510,20 @@ function showMatch(){
 }
 $("#nick").addEventListener("input", showMatch); $("#nick2").addEventListener("input", showMatch);
 lockForm();
+
+/* ---------- hero background: cycle through the battlefields every 3 s ---------- */
+{
+  const art = $("#art"), order = ["volcano","sewers","grass","desert","ruins","prison"];
+  art.innerHTML = order.map((m,i) => `<i${i?"":' class="on"'} style="background-image:url(assets/menu/${m}.webp)"></i>`).join("");
+  const layers = [...art.children];
+  let cur = 0;
+  setInterval(() => {
+    if(document.hidden) return;
+    layers[cur].classList.remove("on");
+    cur = (cur + 1) % layers.length;
+    layers[cur].classList.add("on");
+  }, 3000);
+}
 
 /* ---------- active tab while scrolling ---------- */
 const tabLinks = [...document.querySelectorAll(".tabs a")];
