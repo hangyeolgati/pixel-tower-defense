@@ -89,6 +89,9 @@ h1{font-size:clamp(40px,4.8vw,64px);font-weight:900;line-height:1.05;letter-spac
 .done b{display:block;color:var(--accent2);font-size:15px;margin-bottom:2px}
 .hint{font-size:12px;color:var(--muted);margin-top:8px;min-height:1.5em}
 .hint.err{color:#ed8676}.hint.ok{color:#b7e08a}
+.cta{margin-top:12px;width:100%;color:#a9b4ff;font-size:15px}
+.cta:not(:disabled):hover{color:#c7ceff}
+.cta svg{width:18px;height:18px;flex:none}
 .mine{margin-top:14px;display:flex;align-items:center;gap:12px;padding:10px 12px;background:#1d1710e6;border:1px solid #7a5323;box-shadow:inset 3px 0 var(--accent)}
 .mine b{color:var(--accent2)}.mine small{display:block;color:var(--muted);font-size:11px}
 .mine img{width:28px;height:28px}
@@ -236,6 +239,7 @@ html[lang=en] h1{font-size:clamp(38px,4.4vw,58px)}
       </form>
       <div class="done" id="done" hidden><b data-i18n="done.title">사전 예약을 마친 기기입니다</b><span data-i18n="done.body">사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.</span></div>
       <div class="mine" id="mine" hidden><img src="assets/ui/Icon13.png" alt=""><div><small data-i18n="mine.label">내 사전 예약</small><b id="mine-name"></b> · <span id="mine-no"></span></div></div>
+      <a class="btn cta" href="https://discord.gg/X4HGgz5Av5" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h12v9H7l-3 3v-3H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span data-i18n="cta">디스코드에서 CBT 일정 받기</span> ↗</a>
     </div>
     <div class="scene">
       <span class="scene-label"><i class="dot"></i><span data-i18n="scene.label">현재 사전 예약</span></span>
@@ -302,7 +306,7 @@ const TEXT = {
     lede: "디펜스와 RPG를 결합한 디펜스 RPG.<br>네코랜드 닉네임으로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.",
     "label.nick": "네코랜드 닉네임", "ph.nick": "닉네임 입력 (1~16자)", "label.nick2": "닉네임 확인", "ph.nick2": "오타 방지를 위해 한 번 더 입력",
     submit: "사전 예약 ›", "hint.default": "사전 예약은 기기당 1번만 할 수 있습니다. 명단에는 닉네임의 절반이 별(*)로 가려집니다.",
-    "done.title": "사전 예약을 마친 기기입니다", "done.body": "사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.",
+    "done.title": "사전 예약을 마친 기기입니다", cta: "디스코드에서 CBT 일정 받기", "done.body": "사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.",
     "mine.label": "내 사전 예약", "mine.no": "{n}번째 예약", "mine.done": "등록 완료",
     "scene.label": "현재 사전 예약", "scene.unit": "명", "scene.loading": "명단을 불러오는 중입니다…",
     "scene.ok": "출시 소식은 디스코드에서 가장 먼저 알려 드립니다.", "scene.empty": "첫 번째 사전 예약자를 기다리고 있습니다.",
@@ -318,7 +322,7 @@ const TEXT = {
     "err.empty": "닉네임을 입력해 주세요.", "err.long": "닉네임은 16자까지 입력할 수 있습니다.", "err.char": "사용할 수 없는 문자가 들어 있습니다.",
     "err.mismatch": "두 닉네임이 일치하지 않습니다. 오타가 없는지 확인해 주세요.", "err.notready": "명단 서버에 아직 연결되지 않았습니다.",
     "err.duplicate": "이미 사전 예약된 닉네임입니다.", "err.device": "이 기기에서는 이미 사전 예약을 했습니다.", "err.failed": "등록에 실패했습니다. 잠시 후 다시 시도해 주세요.",
-    sending: "사전 예약을 등록하는 중입니다…", success: "{name} 님, 사전 예약이 완료되었습니다.", toast: "사전 예약이 완료되었습니다. 명단에서 내 자리를 확인해 보세요.",
+    sending: "사전 예약을 등록하는 중입니다…", success: "{name} 님, 사전 예약이 완료되었습니다.", toast: "사전 예약이 완료되었습니다. CBT 일정은 디스코드에서 안내해 드립니다.",
     "match.ok": "✓ 일치합니다", "match.no": "일치하지 않습니다",
   },
   en: {
@@ -328,7 +332,7 @@ const TEXT = {
     lede: "A defense RPG that blends tower defense with RPG growth.<br>Pre-register with your Nekoland nickname and be the first to hear about the launch.",
     "label.nick": "Nekoland nickname", "ph.nick": "Nickname (1–16 chars)", "label.nick2": "Confirm nickname", "ph.nick2": "Type it again to avoid typos",
     submit: "Pre-register ›", "hint.default": "One pre-registration per device. Half of each nickname is hidden with * on the roster.",
-    "done.title": "This device is already pre-registered", "done.body": "Each device can pre-register once. Launch news will be posted on Discord.",
+    "done.title": "This device is already pre-registered", cta: "Get the CBT schedule on Discord", "done.body": "Each device can pre-register once. Launch news will be posted on Discord.",
     "mine.label": "My pre-registration", "mine.no": "#{n} to sign up", "mine.done": "Registered",
     "scene.label": "Pre-registered so far", "scene.unit": "players", "scene.loading": "Loading the roster…",
     "scene.ok": "Launch news goes out first on Discord.", "scene.empty": "Waiting for the first sign-up.",
@@ -344,7 +348,7 @@ const TEXT = {
     "err.empty": "Please enter your nickname.", "err.long": "Nicknames can be up to 16 characters.", "err.char": "The nickname contains characters that can't be used.",
     "err.mismatch": "The two nicknames don't match. Please check for typos.", "err.notready": "Not connected to the roster server yet.",
     "err.duplicate": "That nickname is already pre-registered.", "err.device": "This device has already pre-registered.", "err.failed": "Couldn't register. Please try again shortly.",
-    sending: "Registering…", success: "You're in, {name}! Pre-registration complete.", toast: "Pre-registration complete. Find your spot on the roster.",
+    sending: "Registering…", success: "You're in, {name}! Pre-registration complete.", toast: "Pre-registration complete. The CBT schedule will be announced on Discord.",
     "match.ok": "✓ Matches", "match.no": "Doesn't match",
   },
 };
