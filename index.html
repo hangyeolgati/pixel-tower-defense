@@ -619,7 +619,8 @@ pull(); setInterval(pull, 15000);
 {
   const day = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Seoul"});
   if(store.get("ptd-visit-day") !== day){
-    fetch(API_URL + "?visit=" + encodeURIComponent(deviceId)).then(() => store.set("ptd-visit-day", day)).catch(() => {});
+    let tz = ""; try{ tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; }catch(_){}
+    fetch(API_URL + "?visit=" + encodeURIComponent(deviceId) + "&lang=" + lang + "&tz=" + encodeURIComponent(tz)).then(() => store.set("ptd-visit-day", day)).catch(() => {});
   }
 }
 }
