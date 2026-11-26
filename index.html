@@ -333,7 +333,7 @@ drawTowers();
 /* ---------- helpers ---------- */
 const chars = s => Array.from(s);
 function mask(name){
-  const c = chars(name), hide = c.length === 1 ? 1 : Math.floor(c.length/2);   // 한 글자는 * 하나로
+  const c = chars(name), hide = Math.floor(c.length/2);   // 한 글자는 가리지 않음
   return c.slice(0, c.length-hide).join("") + "*".repeat(hide);
 }
 function clean(raw){ return raw.normalize("NFC").replace(/\s+/g," ").trim(); }
