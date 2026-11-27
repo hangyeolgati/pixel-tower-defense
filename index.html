@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c1518">
 <title>픽셀 타워 디펜스 사전 예약</title>
-<meta name="description" content="디펜스와 RPG를 결합한 디펜스 RPG. 네코랜드 닉네임으로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.">
+<meta name="description" content="디펜스와 RPG를 결합한 디펜스 RPG. 네코랜드 닉네임이나 이메일로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="픽셀 타워 디펜스">
 <meta property="og:title" content="픽셀 타워 디펜스 사전 예약">
-<meta property="og:description" content="디펜스와 RPG를 결합한 디펜스 RPG. 네코랜드 닉네임으로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.">
+<meta property="og:description" content="디펜스와 RPG를 결합한 디펜스 RPG. 네코랜드 닉네임이나 이메일로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.">
 <meta property="og:url" content="https://hangyeolgati.github.io/pixel-tower-defense/">
 <meta property="og:image" content="https://hangyeolgati.github.io/pixel-tower-defense/og.png">
 <meta property="og:image:width" content="512">
@@ -83,6 +83,8 @@ h1{font-size:clamp(40px,4.8vw,64px);font-weight:900;line-height:1.05;letter-spac
 .lede{color:#c9d2d5;font-size:14px;margin-bottom:22px;max-width:40ch}
 .form-label{display:block;font-size:13px;font-weight:700;color:#dae1cd;margin-bottom:6px}
 .form-label+.field{margin-bottom:10px}
+.mode{margin-bottom:12px}.mode button{flex:1;min-height:42px;font-size:14px;font-weight:700}
+.roster li.em .nm{color:var(--muted);font-weight:400}
 .form-label .ok{color:#b7e08a;font-weight:400;font-size:12px;margin-left:6px}.form-label .no{color:#ed8676;font-weight:400;font-size:12px;margin-left:6px}
 .wide{width:100%}
 .done{margin-top:4px;padding:12px 14px;background:var(--panel2);border:1px solid var(--edge);border-top:3px solid var(--accent);font-size:13px;color:#c9d2d5}
@@ -229,16 +231,17 @@ html[lang=en] h1{font-size:clamp(38px,4.4vw,58px)}
     <div class="menu-column">
       <div class="wordmark">PIXEL TOWER DEFENSE</div>
       <h1 data-i18n="h1">픽셀 타워 디펜스</h1>
-      <p class="lede" data-i18n-html="lede">디펜스와 RPG를 결합한 디펜스 RPG.<br>네코랜드 닉네임으로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.</p>
+      <p class="lede" data-i18n-html="lede">디펜스와 RPG를 결합한 디펜스 RPG.<br>네코랜드 닉네임이나 이메일로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.</p>
       <form id="form" novalidate autocomplete="off">
-        <label class="form-label" for="nick" data-i18n="label.nick">네코랜드 닉네임</label>
+        <div class="seg mode" role="group" id="mode-tabs" data-i18n-aria="mode.aria" aria-label="예약 방법"><button type="button" data-mode="nick" class="on" aria-pressed="true" data-i18n="mode.nick">네코랜드 닉네임</button><button type="button" data-mode="email" aria-pressed="false" data-i18n="mode.email">이메일</button></div>
+        <label class="form-label" for="nick" id="label1" data-i18n="label.nick">네코랜드 닉네임</label>
         <input class="field" id="nick" name="nick" maxlength="16" data-i18n-ph="ph.nick" placeholder="닉네임 입력 (1~16자)" enterkeyhint="next" spellcheck="false" autocapitalize="off" required>
-        <label class="form-label" for="nick2"><span data-i18n="label.nick2">닉네임 확인</span> <span id="match" aria-live="polite"></span></label>
+        <label class="form-label" for="nick2"><span id="label2" data-i18n="label.nick2">닉네임 확인</span> <span id="match" aria-live="polite"></span></label>
         <input class="field" id="nick2" name="nick2" maxlength="16" data-i18n-ph="ph.nick2" placeholder="오타 방지를 위해 한 번 더 입력" enterkeyhint="done" spellcheck="false" autocapitalize="off" required>
         <button class="btn primary wide" id="submit" type="submit" data-i18n="submit">사전 예약 ›</button>
         <p class="hint" id="hint" role="status">사전 예약은 기기당 1번만 할 수 있습니다. 명단에는 닉네임의 절반이 별(*)로 가려집니다.</p>
       </form>
-      <div class="done" id="done" hidden><b data-i18n="done.title">사전 예약을 마친 기기입니다</b><span data-i18n="done.body">사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.</span></div>
+      <div class="done" id="done" hidden><b data-i18n="done.title">사전 예약을 마친 기기입니다</b><span id="done-body" data-i18n="done.body">사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.</span></div>
       <div class="mine" id="mine" hidden><img src="assets/ui/Icon13.png" alt=""><div><small data-i18n="mine.label">내 사전 예약</small><b id="mine-name"></b> · <span id="mine-no"></span></div></div>
       <a class="btn cta" href="https://discord.gg/X4HGgz5Av5" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h12v9H7l-3 3v-3H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span data-i18n="cta">디스코드에서 CBT 일정 받기</span> ↗</a>
     </div>
@@ -291,7 +294,8 @@ html[lang=en] h1{font-size:clamp(38px,4.4vw,58px)}
 /* 명단 서버 (구글 시트 Apps Script 웹 앱)
    GET  API_URL               → {"items":[{"name":"가린 닉네임","at":1764000000000}]}
    GET  API_URL?visit=<기기>  → 방문 기록
-   POST API_URL {nickname, deviceId} → {"ok":true} 또는 {"ok":false,"error":"duplicate"|"device"|"invalid"|"busy"} */
+   POST API_URL {nickname, deviceId} 또는 {email, deviceId} → {"ok":true} 또는 {"ok":false,"error":"duplicate"|"device"|"invalid"|"busy"}
+   이메일로 예약한 사람은 items에 {"kind":"email"}로 오고 명단에는 "이메일"/"Email"로만 표시 (주소는 내보내지 않음) */
 const API_URL = "https://script.google.com/macros/s/AKfycbzqeeQaJ_gMfjyz4QCW07wVRo5g0_KoOeuteEuZiUZrgDD8eerChCBW1z0NCfQwcQ8e2g/exec";
 
 const $ = s => document.querySelector(s);
@@ -304,8 +308,11 @@ const TEXT = {
     title: "픽셀 타워 디펜스 사전 예약", brand: "픽셀 타워 디펜스", "aria.nav": "페이지 메뉴",
     "nav.reserve": "사전 예약", "nav.roster": "명단", "nav.features": "게임 소개", "nav.towers": "타워", "nav.maps": "전장",
     wallet: "명 예약", discord: "디스코드 ↗", h1: "픽셀 타워 디펜스",
-    lede: "디펜스와 RPG를 결합한 디펜스 RPG.<br>네코랜드 닉네임으로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.",
+    lede: "디펜스와 RPG를 결합한 디펜스 RPG.<br>네코랜드 닉네임이나 이메일로 사전 예약하고 출시 소식을 가장 먼저 받아 보세요.",
     "label.nick": "네코랜드 닉네임", "ph.nick": "닉네임 입력 (1~16자)", "label.nick2": "닉네임 확인", "ph.nick2": "오타 방지를 위해 한 번 더 입력",
+    "mode.aria": "예약 방법", "mode.nick": "네코랜드 닉네임", "mode.email": "이메일",
+    "label.email": "이메일", "ph.email": "이메일 주소 입력", "label.email2": "이메일 확인", "roster.email": "이메일",
+    "hint.email": "사전 예약은 기기당 1번만 할 수 있습니다. 이메일 주소는 명단에 표시되지 않으며, 닉네임 입력 안내를 보내 드리는 데 사용합니다.",
     submit: "사전 예약 ›", "hint.default": "사전 예약은 기기당 1번만 할 수 있습니다. 명단에는 닉네임의 절반이 별(*)로 가려집니다.",
     "done.title": "사전 예약을 마친 기기입니다", cta: "디스코드에서 CBT 일정 받기", "done.body": "사전 예약은 기기당 1번만 할 수 있습니다. 출시 소식은 디스코드에서 알려 드립니다.",
     "mine.label": "내 사전 예약", "mine.no": "{n}번째 예약", "mine.done": "등록 완료",
@@ -323,6 +330,9 @@ const TEXT = {
     "err.empty": "닉네임을 입력해 주세요.", "err.long": "닉네임은 16자까지 입력할 수 있습니다.", "err.char": "사용할 수 없는 문자가 들어 있습니다.",
     "err.mismatch": "두 닉네임이 일치하지 않습니다. 오타가 없는지 확인해 주세요.", "err.notready": "명단 서버에 아직 연결되지 않았습니다.",
     "err.duplicate": "이미 사전 예약된 닉네임입니다.", "err.device": "이 기기에서는 이미 사전 예약을 했습니다.", "err.failed": "등록에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+    "done.body.email": "닉네임 입력 안내를 예약하신 이메일로 보내 드리겠습니다. 출시 소식은 디스코드에서 알려 드립니다.",
+    "err.email.empty": "이메일 주소를 입력해 주세요.", "err.email.bad": "이메일 주소를 정확히 입력해 주세요.", "err.email.mismatch": "두 이메일 주소가 일치하지 않습니다. 오타가 없는지 확인해 주세요.",
+    "err.email.duplicate": "이미 사전 예약된 이메일입니다.", "success.email": "이메일로 사전 예약이 완료되었습니다. 닉네임 입력 안내를 이메일로 보내 드리겠습니다.",
     sending: "사전 예약을 등록하는 중입니다…", success: "{name} 님, 사전 예약이 완료되었습니다.", toast: "사전 예약이 완료되었습니다. CBT 일정은 디스코드에서 안내해 드립니다.",
     "match.ok": "✓ 일치합니다", "match.no": "일치하지 않습니다",
   },
@@ -330,8 +340,11 @@ const TEXT = {
     title: "Pixel Tower Defense Pre-registration", brand: "Pixel Tower Defense", "aria.nav": "Page menu",
     "nav.reserve": "Pre-register", "nav.roster": "Roster", "nav.features": "Features", "nav.towers": "Towers", "nav.maps": "Maps",
     wallet: "signed up", discord: "Discord ↗", h1: "Pixel Tower Defense",
-    lede: "A defense RPG that blends tower defense with RPG growth.<br>Pre-register with your Nekoland nickname and be the first to hear about the launch.",
+    lede: "A defense RPG that blends tower defense with RPG growth.<br>Pre-register with your Nekoland nickname or email and be the first to hear about the launch.",
     "label.nick": "Nekoland nickname", "ph.nick": "Nickname (1–16 chars)", "label.nick2": "Confirm nickname", "ph.nick2": "Type it again to avoid typos",
+    "mode.aria": "How to sign up", "mode.nick": "Nekoland nickname", "mode.email": "Email",
+    "label.email": "Email", "ph.email": "Enter your email address", "label.email2": "Confirm email", "roster.email": "Email",
+    "hint.email": "One pre-registration per device. Your email address is never shown on the roster. We'll use it to send you a link to enter your nickname.",
     submit: "Pre-register ›", "hint.default": "One pre-registration per device. Half of each nickname is hidden with * on the roster.",
     "done.title": "This device is already pre-registered", cta: "Get the CBT schedule on Discord", "done.body": "Each device can pre-register once. Launch news will be posted on Discord.",
     "mine.label": "My pre-registration", "mine.no": "#{n} to sign up", "mine.done": "Registered",
@@ -349,6 +362,9 @@ const TEXT = {
     "err.empty": "Please enter your nickname.", "err.long": "Nicknames can be up to 16 characters.", "err.char": "The nickname contains characters that can't be used.",
     "err.mismatch": "The two nicknames don't match. Please check for typos.", "err.notready": "Not connected to the roster server yet.",
     "err.duplicate": "That nickname is already pre-registered.", "err.device": "This device has already pre-registered.", "err.failed": "Couldn't register. Please try again shortly.",
+    "done.body.email": "We'll email you a link to enter your nickname. Launch news will be posted on Discord.",
+    "err.email.empty": "Please enter your email address.", "err.email.bad": "Please enter a valid email address.", "err.email.mismatch": "The two email addresses don't match. Please check for typos.",
+    "err.email.duplicate": "That email is already pre-registered.", "success.email": "You're pre-registered by email. We'll email you a link to enter your nickname.",
     sending: "Registering…", success: "You're in, {name}! Pre-registration complete.", toast: "Pre-registration complete. The CBT schedule will be announced on Discord.",
     "match.ok": "✓ Matches", "match.no": "Doesn't match",
   },
@@ -423,6 +439,7 @@ if(lang !== "en") lang = "ko";
 const t = (k, v) => { let s = (TEXT[lang][k] ?? TEXT.ko[k] ?? k); if(v) for(const n in v) s = s.split("{" + n + "}").join(v[n]); return s; };
 const fmt = n => n.toLocaleString(lang === "en" ? "en-US" : "ko-KR");
 
+let mode = "nick";   // "nick" | "email"
 let grade = -1, hintKey = "hint.default", hintVars = null, hintKind = "", sceneKey = "scene.loading", matchState = "";
 function hint(key, kind, vars){ hintKey = key; hintKind = kind || ""; hintVars = vars || null; const el = $("#hint"); el.textContent = t(key, vars); el.className = "hint" + (hintKind ? " " + hintKind : ""); }
 function scene(key){ sceneKey = key; $("#scene-note").textContent = t(key); }
@@ -448,6 +465,7 @@ $("#grade-tabs").addEventListener("click", e => {
 function applyLang(){
   document.documentElement.lang = lang;
   document.title = t("title");
+  setModeKeys();
   document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));   /* our own fixed strings only */
   document.querySelectorAll("[data-i18n-ph]").forEach(el => el.placeholder = t(el.dataset.i18nPh));
@@ -470,6 +488,26 @@ document.querySelector(".lang").addEventListener("click", e => {
   applyLang();
 });
 
+/* ---------- 예약 방법: 닉네임 / 이메일 ---------- */
+function setModeKeys(){
+  const em = mode === "email", a = $("#nick"), b = $("#nick2");
+  $("#label1").dataset.i18n = em ? "label.email" : "label.nick";
+  $("#label2").dataset.i18n = em ? "label.email2" : "label.nick2";
+  a.dataset.i18nPh = em ? "ph.email" : "ph.nick";
+  for(const el of [a, b]){ el.maxLength = em ? 100 : 16; el.inputMode = em ? "email" : "text"; el.type = em ? "email" : "text"; }
+  document.querySelectorAll("#mode-tabs button").forEach(x => { const on = x.dataset.mode === mode; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+}
+$("#mode-tabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b || b.dataset.mode === mode || busy) return;
+  mode = b.dataset.mode;
+  $("#nick").value = ""; $("#nick2").value = "";
+  setModeKeys();
+  $("#label1").textContent = t($("#label1").dataset.i18n); $("#label2").textContent = t($("#label2").dataset.i18n);
+  $("#nick").placeholder = t($("#nick").dataset.i18nPh);
+  hint(mode === "email" ? "hint.email" : "hint.default"); showMatch();
+  $("#nick").focus();
+});
+
 /* ---------- helpers ---------- */
 const chars = s => Array.from(s);
 function mask(name){
@@ -477,6 +515,15 @@ function mask(name){
   return c.slice(0, c.length-hide).join("") + "*".repeat(hide);
 }
 function clean(raw){ return raw.normalize("NFC").replace(/\s+/g," ").trim(); }
+function maskEmail(e){
+  const at = e.lastIndexOf("@"), c = chars(e.slice(0, at)), keep = Math.max(1, Math.ceil(c.length/2));
+  return c.slice(0, keep).join("") + "*".repeat(Math.max(1, c.length-keep)) + e.slice(at);
+}
+function checkEmail(e){
+  if(!e) return "err.email.empty";
+  if(e.length > 100 || !/^[^\s@<>"',;]+@[^\s@<>"',;]+\.[^\s@<>"',;.]{2,}$/.test(e)) return "err.email.bad";
+  return "";
+}
 function check(n){
   const len = chars(n).length;
   if(!len) return "err.empty";
@@ -511,7 +558,10 @@ function toast(msg){
 let deviceId = store.get("ptd-device");
 if(!deviceId){ deviceId = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)); store.set("ptd-device", deviceId); }
 let myKey = store.get("ptd-prereg-key") || "";
-function lockForm(){ const done = !!myKey; $("#form").hidden = done; $("#done").hidden = !done; }
+function lockForm(){
+  const done = !!myKey; $("#form").hidden = done; $("#done").hidden = !done;
+  const el = $("#done-body"); el.dataset.i18n = store.get("ptd-prereg-kind") === "email" ? "done.body.email" : "done.body"; el.textContent = t(el.dataset.i18n);
+}
 
 /* ---------- roster ---------- */
 let rows = [], sort = "new", shown = 60, seen = new Set(), firstLoad = true;
@@ -521,8 +571,9 @@ function render(){
   const numbered = rows.map((r,i) => ({...r, no:i+1}));
   const list = sort === "new" ? numbered.slice().reverse() : numbered;
   $("#list").innerHTML = list.slice(0, shown).map(r => {
-    const cls = [r.id===myKey ? "me" : "", !firstLoad && !seen.has(r.id) ? "fresh" : ""].join(" ").trim();
-    return `<li${cls?` class="${cls}"`:""}><span class="no">#${fmt(r.no)}</span><span class="nm">${esc(mask(String(r.name||"")))}</span><time>${esc(ago(r.at))}</time></li>`;
+    const em = r.kind === "email";
+    const cls = [r.id===myKey ? "me" : "", em ? "em" : "", !firstLoad && !seen.has(r.id) ? "fresh" : ""].join(" ").trim().replace(/\s+/g," ");
+    return `<li${cls?` class="${cls}"`:""}><span class="no">#${fmt(r.no)}</span><span class="nm">${esc(em ? t("roster.email") : mask(String(r.name||"")))}</span><time>${esc(ago(r.at))}</time></li>`;
   }).join("");
   rows.forEach(r => seen.add(r.id)); firstLoad = false;
   $("#more").hidden = list.length <= shown;
@@ -530,10 +581,10 @@ function render(){
   if(!total) $("#empty").textContent = t("empty");
   const mine = numbered.find(r => r.id === myKey) || (myKey && store.get("ptd-prereg-name") ? {name: store.get("ptd-prereg-name"), no: 0} : null);
   $("#mine").hidden = !mine;
-  if(mine){ $("#mine-name").textContent = mask(String(mine.name||"")); $("#mine-no").textContent = mine.no ? t("mine.no", {n: fmt(mine.no)}) : t("mine.done"); }
+  if(mine){ $("#mine-name").textContent = store.get("ptd-prereg-kind") === "email" ? String(mine.name||"") : mask(String(mine.name||"")); $("#mine-no").textContent = mine.no ? t("mine.no", {n: fmt(mine.no)}) : t("mine.done"); }
 }
 function setRows(list){
-  rows = list.filter(r => r && typeof r.at === "number" && r.name).sort((a,b) => a.at - b.at);
+  rows = list.filter(r => r && typeof r.at === "number" && (r.name || r.kind === "email")).sort((a,b) => a.at - b.at);
   scene(rows.length ? "scene.ok" : "scene.empty");
   render();
 }
@@ -550,11 +601,11 @@ async function pull(){
   try{
     const r = await fetch(API_URL);
     const j = await r.json();
-    setRows((j.items||[]).map((x,i) => ({id:"a"+i+"-"+x.at, name:String(x.name||""), at:+x.at})));
+    setRows((j.items||[]).map((x,i) => ({id:"a"+i+"-"+x.at, name:String(x.name||""), kind:x.kind === "email" ? "email" : "", at:+x.at})));
   }catch(_){ scene("scene.err"); }
 }
-async function add(nick){
-  const r = await fetch(API_URL, {method:"POST", headers:{"content-type":"text/plain;charset=utf-8"}, body:JSON.stringify({nickname:nick, deviceId})});
+async function add(value, kind){
+  const r = await fetch(API_URL, {method:"POST", headers:{"content-type":"text/plain;charset=utf-8"}, body:JSON.stringify(kind === "email" ? {email:value, deviceId} : {nickname:value, deviceId})});
   const j = await r.json().catch(() => ({}));
   if(!j.ok) throw {code: j.error === "duplicate" || j.error === "device" ? j.error : "failed"};
   await pull();
@@ -566,29 +617,32 @@ $("#form").addEventListener("submit", async e => {
   e.preventDefault();
   if(busy) return;
   if(myKey){ lockForm(); return; }
-  const nick = clean($("#nick").value);
-  const bad = check(nick);
+  const em = mode === "email";
+  const nick = em ? val($("#nick")) : clean($("#nick").value);
+  const bad = em ? checkEmail(nick) : check(nick);
   if(bad){ hint(bad, "err"); $("#nick").focus(); return; }
-  if(clean($("#nick2").value) !== nick){ hint("err.mismatch", "err"); $("#nick2").focus(); return; }
+  if(val($("#nick2")) !== nick){ hint(em ? "err.email.mismatch" : "err.mismatch", "err"); $("#nick2").focus(); return; }
   busy = true; $("#submit").disabled = true; hint("sending");
   try{
-    await add(nick);
-    myKey = await keyOf(nick); store.set("ptd-prereg-key", myKey); store.set("ptd-prereg-name", mask(nick));
+    await add(nick, em ? "email" : "nick");
+    const shownName = em ? maskEmail(nick) : mask(nick);
+    myKey = await keyOf(nick); store.set("ptd-prereg-key", myKey); store.set("ptd-prereg-name", shownName); store.set("ptd-prereg-kind", em ? "email" : "nick");
     $("#nick").value = ""; $("#nick2").value = ""; showMatch();
     lockForm();
-    hint("success", "ok", {name: mask(nick)});
+    if(em) hint("success.email", "ok"); else hint("success", "ok", {name: shownName});
     toast(t("toast"));
     render();
   }catch(err){
     const code = err && err.code;
-    hint(code === "duplicate" ? "err.duplicate" : code === "device" ? "err.device" : "err.failed", "err");
+    hint(code === "duplicate" ? (em ? "err.email.duplicate" : "err.duplicate") : code === "device" ? "err.device" : "err.failed", "err");
   }finally{
     busy = false; $("#submit").disabled = false;
   }
 });
 
+function val(el){ const v = clean(el.value); return mode === "email" ? v.toLowerCase() : v; }
 function showMatch(){
-  const a = clean($("#nick").value), b = clean($("#nick2").value), el = $("#match");
+  const a = val($("#nick")), b = val($("#nick2")), el = $("#match");
   if(!b){ el.textContent = ""; el.className = ""; return; }
   const same = a === b;
   el.textContent = t(same ? "match.ok" : "match.no"); el.className = same ? "ok" : "no";
